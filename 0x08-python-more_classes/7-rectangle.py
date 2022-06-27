@@ -7,9 +7,30 @@ This module defines the a Rectangle Object.
 class Rectangle:
     """Retangle object with getter and setters
     """
+
+    number_of_instances = 0
+    print_symbol = "#"
+
     def __init__(self, width=0, height=0):
         self.width = width
         self.height = height
+        Rectangle.number_of_instances += 1
+
+    def __str__(self):
+        total = ""
+        if self.__height == 0 or self.width == 0:
+            return total
+        for i in range(self.__height):
+            total += (str(self.print_symbol) * self.__width)
+            if i != self.__height - 1:
+                total += "\n"
+        return total
+
+    def __repr__(self):
+        return "Rectangle({:d}, {:d})".format(self.__width, self.__height)
+
+    def __del__(self):
+        print("Bye rectangle...")
 
     @property
     def width(self):
