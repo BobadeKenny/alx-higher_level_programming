@@ -5,8 +5,7 @@ This module demonstrates a class MyList that inherits from list
 
 
 class MyList(list):
-    """
-    List Object
+    """List Object
     """
     def print_sorted(self):
         """
