@@ -17,7 +17,7 @@ def append_write(filename="", text=""):
         int: number of characters
     """
     with open(filename, "a", encoding="utf-8") as f:
-        num = f.write(text)
-    return(num)
+        f.write(text)
+    return(len(text))
 nb_characters_added = append_write("my_first_file.txt", "This School is so cool!\n")
 print(nb_characters_added)
