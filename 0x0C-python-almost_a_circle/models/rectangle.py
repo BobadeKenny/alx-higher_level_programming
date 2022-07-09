@@ -98,8 +98,9 @@ class Rectangle(Base):
     def display(self):
         """display rectangle with #
         """
+        print("\n"*self.__y, end="")
         for i in range(self.__height):
-            print("#"*self.__width, end="")
+            print(" "*self.__x + "#"*self.__width, end="")
             print()
 
     def __str__(self):
@@ -111,3 +112,16 @@ class Rectangle(Base):
         return ("[Rectangle] ({}) {}/{} - {}/{}"
                 .format(self.id, self.__x,
                         self.__y, self.__width, self.__height))
+
+    def update(self, *args, **kwargs):
+        """update rectangle parameters
+        """
+        if len(args) > 0:
+            attrs = ["id", "width", "height", "x", "y"]
+            for i in range(len(args)):
+                if i > 4:
+                    break
+                setattr(self, attrs[i], args[i])
+        else:
+            for key, value in kwargs.items():
+                setattr(self, key, value)
