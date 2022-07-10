@@ -93,14 +93,14 @@ class Rectangle(Base):
     def area(self):
         """find area of rectangle
         """
-        return (self.__width * self.__height)
+        return (self.width * self.height)
 
     def display(self):
         """display rectangle with #
         """
         print("\n"*self.__y, end="")
-        for i in range(self.__height):
-            print(" "*self.__x + "#"*self.__width, end="")
+        for i in range(self.height):
+            print(" "*self.x + "#"*self.width, end="")
             print()
 
     def __str__(self):
@@ -110,8 +110,8 @@ class Rectangle(Base):
             str: string representation of class
         """
         return ("[Rectangle] ({}) {}/{} - {}/{}"
-                .format(self.id, self.__x,
-                        self.__y, self.__width, self.__height))
+                .format(self.id, self.x,
+                        self.y, self.width, self.height))
 
     def update(self, *args, **kwargs):
         """update rectangle parameters
@@ -125,3 +125,12 @@ class Rectangle(Base):
         else:
             for key, value in kwargs.items():
                 setattr(self, key, value)
+
+    def to_dictionary(self):
+        """dict representation of rectangle
+        """
+        to_dict = {
+            'x': self.x, 'y': self.y, 'id': self.id,
+            'height': self.height, 'width': self.width
+                }
+        return to_dict
