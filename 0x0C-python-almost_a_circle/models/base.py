@@ -71,7 +71,8 @@ class Base:
         instances = []
         with open(filename, encoding="utf-8") as f:
             json_string = f.read()
-            instances = [cls.create(**obj) for obj in cls.from_json_string(json_string)]
+            instances = [
+                cls.create(**obj) for obj in cls.from_json_string(json_string)]
         return(instances)
 
     @classmethod
@@ -97,8 +98,7 @@ class Base:
         instances = []
         with open(filename, encoding="utf-8") as f:
             objs = [{key: int(value) for key, value in row.items()}
-            for row in csv.DictReader(f, skipinitialspace=True)
-            ]
+                    for row in csv.DictReader(f, skipinitialspace=True)]
         instances = [cls.create(**obj) for obj in objs]
         return(instances)
 
