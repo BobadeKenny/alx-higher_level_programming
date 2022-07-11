@@ -6,6 +6,7 @@ This class will be the “base” of all other classes in this project
 
 import json
 import csv
+import turtle
 
 
 class Base:
@@ -100,3 +101,19 @@ class Base:
             ]
         instances = [cls.create(**obj) for obj in objs]
         return(instances)
+
+    @staticmethod
+    def draw(list_rectangles, list_squares):
+        board = turtle.Turtle()
+        for i in (list_rectangles + list_squares):
+            board.up()
+            board.goto(i.x, i.y)
+            board.down()
+            board.forward(i.width)
+            board.right(90)
+            board.forward(i.height)
+            board.right(90)
+            board.forward(i.width)
+            board.right(90)
+            board.forward(i.height)
+        turtle.done()
