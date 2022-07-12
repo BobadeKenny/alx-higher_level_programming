@@ -59,9 +59,10 @@ class Base:
     def create(cls, **dictionary):
         """returns an instance with all attributes already set
         """
-        new_class = cls(1, 1)
-        new_class.update(**dictionary)
-        return(new_class)
+        if cls.__name__ == "Rectangle" or cls.__name__ == "Square":
+            new_class = cls(1, 1)
+            new_class.update(**dictionary)
+            return(new_class)
 
     @classmethod
     def load_from_file(cls):
@@ -70,7 +71,7 @@ class Base:
         filename = cls.__name__ + ".json"
         instances = []
         with open(filename, encoding="utf-8") as f:
-            json_string = f.read()
+            json_string = f.read().replace('\n', '')
             instances = [
                 cls.create(**obj) for obj in cls.from_json_string(json_string)]
         return(instances)
