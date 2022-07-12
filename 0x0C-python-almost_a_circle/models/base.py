@@ -59,10 +59,12 @@ class Base:
     def create(cls, **dictionary):
         """returns an instance with all attributes already set
         """
-        if cls.__name__ == "Rectangle" or cls.__name__ == "Square":
+        if cls.__name__ == "Rectangle":
             new_class = cls(1, 1)
-            new_class.update(**dictionary)
-            return(new_class)
+        elif cls.__name__ == "Square":
+            new_class = cls(1)
+        new_class.update(**dictionary)
+        return(new_class)
 
     @classmethod
     def load_from_file(cls):
