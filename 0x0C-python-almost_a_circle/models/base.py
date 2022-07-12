@@ -70,26 +70,30 @@ class Base:
         """
         filename = cls.__name__ + ".json"
         instances = []
-        with open(filename, encoding="utf-8") as f:
-            json_string = f.read().replace('\n', '')
-            instances = [
-                cls.create(**obj) for obj in cls.from_json_string(json_string)]
+        try:
+            with open(filename, encoding="utf-8") as f:
+                json_string = f.read().replace('\n', '')
+                instances = [
+                    cls.create(**obj)
+                    for obj in cls.from_json_string(json_string)]
+        except IOError:
+            pass
         return(instances)
 
     @classmethod
     def save_to_file_csv(cls, list_objs):
         """serializes in CSV
         """
-        if list_objs is None:
-            dicts = []
-        else:
-            dicts = [i.to_dictionary() for i in list_objs]
         filename = cls.__name__ + ".csv"
-        fields = dicts[0].keys()
         with open(filename, "w", encoding="utf-8") as csvfile:
-            writer = csv.DictWriter(csvfile, fieldnames=fields)
-            writer.writeheader()
-            writer.writerows(dicts)
+            if list_objs is None or list_objs == []:
+                csvfile.write("[]")
+            else:
+                dicts = [i.to_dictionary() for i in list_objs]
+                fields = dicts[0].keys()
+                writer = csv.DictWriter(csvfile, fieldnames=fields)
+                writer.writeheader()
+                writer.writerows(dicts)
 
     @classmethod
     def load_from_file_csv(cls):
@@ -97,10 +101,13 @@ class Base:
         """
         filename = cls.__name__ + ".csv"
         instances = []
-        with open(filename, encoding="utf-8") as f:
-            objs = [{key: int(value) for key, value in row.items()}
-                    for row in csv.DictReader(f, skipinitialspace=True)]
-        instances = [cls.create(**obj) for obj in objs]
+        try:
+            with open(filename, encoding="utf-8") as f:
+                objs = [{key: int(value) for key, value in row.items()}
+                        for row in csv.DictReader(f, skipinitialspace=True)]
+            instances = [cls.create(**obj) for obj in objs]
+        except IOError:
+            pass
         return(instances)
 
     @staticmethod
