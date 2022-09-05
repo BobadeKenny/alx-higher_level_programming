@@ -1,12 +1,10 @@
 #!/usr/bin/node
-let intVal = parseInt(process.argv[2]);
-let res = 1;
-if (isNaN(intVal)) {
-  console.log(1);
-} else {
-  while (intVal > 0) {
-    res *= intVal;
-    intVal--;
+function factorial (num) {
+  if (isNaN(num) || num === 0) {
+    return 1;
+  } else {
+    return (num * factorial(num - 1));
   }
-  console.log(res);
 }
+const intVal = parseInt(process.argv[2]);
+console.log(factorial(intVal));
