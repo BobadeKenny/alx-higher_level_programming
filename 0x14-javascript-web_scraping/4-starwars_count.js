@@ -7,9 +7,12 @@ request(process.argv[2], function (err, response, body) {
   const results = JSON.parse(body).results;
   let num = 0;
   for (let index = 0; index < results.length; index++) {
-    if (results[index].characters.includes('https://swapi-api.hbtn.io/api/people/18/')) {
-      num++;
-    }
+    results[index].characters.forEach(element => {
+      if (element.includes("18"))
+      {
+        num++
+      }
+    });
   }
   console.log(num);
 });
