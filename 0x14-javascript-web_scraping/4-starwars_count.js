@@ -8,9 +8,8 @@ request(process.argv[2], function (err, response, body) {
   let num = 0;
   for (let index = 0; index < results.length; index++) {
     results[index].characters.forEach(element => {
-      if (element.includes("18"))
-      {
-        num++
+      if (element.includes('18')) {
+        num++;
       }
     });
   }
